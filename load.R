@@ -5,5 +5,9 @@
 # cp header.txt data.txt
 # cat 20070201_2 >> data.txt
 library(dplyr)
+
+# read file, missing data is "?"
 dat<-read.csv("data.txt",head=T, sep = ';', stringsAsFactors = F, na.strings = '?')
+
+# join date and time and parse as posixct object
 dat<-mutate(dat, DateTime = as.POSIXct(strptime(paste(Date,Time), format = '%d/%m/%Y %H:%M:%S')))
